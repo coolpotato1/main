@@ -31,10 +31,10 @@ public class PersonCard extends UiPart<Region> {
     private static HashMap<String, String> colorMapping = new HashMap<String, String>();
     private static Random random = new Random();
 
+    public final ReadOnlyPerson person;
+
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
-
-    public final ReadOnlyPerson person;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,8 +43,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-
 
     @FXML
     private HBox cardPane;
