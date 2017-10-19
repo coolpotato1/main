@@ -966,3 +966,17 @@ Command entered: ‘favlist’
 In a similar way, the ‘fav [index]’ and ‘unfav [index]’ commands also call various classes and methods in order to add/ remove a person from the favourite List respectively.
 
 This feature will make it more convenient for Users to organize their contacts so that they can access their favourite contacts by simply using the flist command instead of searching by name or tags.
+
+== Enhancement Description
+Author: Peng Xu
+
+Added color tags
+
+The feature is that assign different colors to each tag of person card. Every time when program starts, it will assign color to each tag randomly.
+
+== Enhancement Description
+Author: Peng Xu
+
+Added theme change menu item
+
+The feature is that user can change background color via the theme buttons on the menubar.
