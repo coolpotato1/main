@@ -1,4 +1,4 @@
-﻿= AddressBook Level 4 - Developer Guide
+= AddressBook Level 4 - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -775,7 +775,23 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
+== UI Changes: Delete and Undo/Redo Buttons
 
+The improved UI makes use of three new buttons to perform tasks quickly and intuitively, without the use of the command line interface.
+
+The 'Delete' button, taking the form of a red 'X' appearing in each personCard shown in the PersonListPanel, allows users to quickly delete people from the list with a single click.
+This button is handled by the 'PersonCard' object, which now handles the `buttonEvent` it throws when clicked. This causes a call on `logic.execute()` on `delete` + the number of the card's index.
+This command can be undone/redone normally, and also triggers the correct `Deleted Person: ____` text to appear below the command line.
+It does this by raising a `NewResultAvailableEvent`, which is handled by the ResultDisplay.
+
+The 'Undo' and 'Redo' buttons now exist beside the command line at the top of the addressbook.
+Their position is not final, and the <Region> added to align them to the right currently prevents the command line from occupying most of the space it did before. This will be fixed in future versions.
+Like the 'Delete' button, they update the ResultDisplay with the 'Undo Successful!' notice, again by raising the same `NewResultAvailableEvent`.
+To match the style of the 'Delete' Button, future verions may use smaller buttons and forward/backwards arrows as often used as undo/redo buttons in text editors.
+
+It should be noted that while the buttons appear to function properly, they may not yet properly work with historySnapshot functions.
+This is because 'PersonCard' does not presently have the 'ListElementPointer' `historySnapshot`, which exists soley in commandBox, as that was previously the only place commands ran from.
+This could be fixed by extracting that functionality to a new class utilized by both 'PersonCard' and 'CommandBox' if that functionality is desired.
 
 [appendix]
 == Use Cases
@@ -923,7 +939,7 @@ Cons:
 * ...
 * ...
 
-
+[appendix]
 == Enhancement Description
 Author: Siri
 
@@ -945,7 +961,7 @@ Command entered: ‘favlist’
 
 1. AddresBookParser returns FavouriteCommand class to Main method.
 2. FavouriteCommand class executes CommandResult method
-3. ChangeListTo method in Commandesult calls the ChangeInternalListEvent with the command word ‘favlist’ as the parameter which returns the updated List.
+3. ChangeListTo method in Commandesult calls the ChangeInternalListaEvent with the command word ‘favlist’ as the parameter which returns the updated List.
 
 In a similar way, the ‘fav [index]’ and ‘unfav [index]’ commands also call various classes and methods in order to add/ remove a person from the favourite List respectively.
 
@@ -955,6 +971,7 @@ This feature will make it more convenient for Users to organize their contacts s
 Author: Peng Xu
 
 Added color tags
+
 The feature is that assign different colors to each tag of person card. Every time when program starts, it will assign color to each tag randomly.
 
 == Enhancement Description
