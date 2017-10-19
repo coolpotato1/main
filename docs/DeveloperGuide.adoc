@@ -961,7 +961,7 @@ Command entered: ‘favlist’
 
 1. AddresBookParser returns FavouriteCommand class to Main method.
 2. FavouriteCommand class executes CommandResult method
-3. ChangeListTo method in Commandesult calls the ChangeInternalListEvent with the command word ‘favlist’ as the parameter which returns the updated List.
+3. ChangeListTo method in Commandesult calls the ChangeInternalListaEvent with the command word ‘favlist’ as the parameter which returns the updated List.
 
 In a similar way, the ‘fav [index]’ and ‘unfav [index]’ commands also call various classes and methods in order to add/ remove a person from the favourite List respectively.
 
