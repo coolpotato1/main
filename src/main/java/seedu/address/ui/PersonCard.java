@@ -27,10 +27,15 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    
+    private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
+    private static HashMap<String, String> colorMapping = new HashMap<String, String>();
+    private static Random random = new Random();
 
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
 
+    public final ReadOnlyPerson person;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,11 +45,6 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
-    private static HashMap<String, String> colorMapping = new HashMap<String, String>();
-    private static Random random = new Random();
-
-    public final ReadOnlyPerson person;
 
 
     @FXML
