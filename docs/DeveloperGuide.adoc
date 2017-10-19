@@ -922,3 +922,20 @@ Cons:
 
 * ...
 * ...
+
+[appendix]
+ == Enhancement Description
+ Author: Peng Xu
+
+ Added color tags
+
+ The feature is that assign different colors to each tag of person card. Every time when program starts, it will
+ assign color to each tag randomly.
+
+[appendix]
+ == Enhancement Description
+ Author: Peng Xu
+
+ Added theme change menu item
+
+The feature is that user can change background color via the theme buttons on the menubar.
