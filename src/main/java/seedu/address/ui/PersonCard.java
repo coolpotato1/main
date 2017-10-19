@@ -27,10 +27,6 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static String[] colors = { "red", "orange", "yellow", "green", "blue", "purple"};
-    private static HashMap<String, String> colorMapping = new HashMap<String, String>();
-
-    public final ReadOnlyPerson person;
 
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -45,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
-    private static HashMap<String, String> tagColors = new HashMap<String, String>();
+    private static HashMap<String, String> colorMapping = new HashMap<String, String>();
     private static Random random = new Random();
 
     public final ReadOnlyPerson person;
@@ -80,11 +76,11 @@ public class PersonCard extends UiPart<Region> {
 
     private static String getColorForTag(String tagValue) {
 
-        if (!tagColors.containsKey(tagValue)) {
-            tagColors.put(tagValue, colors[random.nextInt(colors.length)]);
+        if (!colorMapping.containsKey(tagValue)) {
+            colorMapping.put(tagValue, colors[random.nextInt(colors.length)]);
         }
 
-        return tagColors.get(tagValue);
+        return colorMapping.get(tagValue);
     }
 
     /**
@@ -125,9 +121,7 @@ public class PersonCard extends UiPart<Region> {
             tagLabel.setStyle("-fx-background-color: " + getColorForTag(tag.tagName));
             tags.getChildren().add(tagLabel);
         });
-            tagLabel.setStyle("-fx-background-color: " + mapTagToColor(tag.tagName));
-            tags.getChildren().add(tagLabel);
-        });
+
         //person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
