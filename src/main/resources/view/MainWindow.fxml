@@ -22,12 +22,6 @@
     <Menu mnemonicParsing="false" text="Help">
       <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
     </Menu>
-    <Menu mnemonicParsing="false" text="Theme">
-      <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Dark" />
-      <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Light" />
-      <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Light Blue" />
-      <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Light Brown" />
-    </Menu>
   </MenuBar>
 
   <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
