@@ -208,6 +208,15 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleTheme() {
+        System.out.printf("change color!");
+    }
+
     public PersonListPanel getPersonListPanel() {
         return this.personListPanel;
     }
