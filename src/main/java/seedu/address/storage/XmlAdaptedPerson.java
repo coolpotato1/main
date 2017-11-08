@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -26,7 +27,11 @@ public class XmlAdaptedPerson {
     private String name;
     @XmlElement(required = true)
     private String phone;
+    @XmlElement (required = true)
+    //@@author siri99
+    private String birthday;
     @XmlElement(required = true)
+    //@@author siri99
     private String email;
     @XmlElement(required = true)
     private String address;
@@ -52,6 +57,9 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+        //@@author siri99
+        birthday = source.getBirthday().value;
+        //@@author siri99
         email = source.getEmail().value;
         address = source.getAddress().value;
         score = source.getScore().value;
@@ -73,10 +81,11 @@ public class XmlAdaptedPerson {
         }
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone);
+        final Birthday birthday = new Birthday(this.birthday);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final Score score = new Score(this.score);
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, score, tags);
+        return new Person(name, phone, birthday, email, address, score, tags);
     }
 }

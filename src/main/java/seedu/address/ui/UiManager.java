@@ -127,12 +127,12 @@ public class UiManager extends ComponentManager implements Ui {
                 event.exception);
     }
 
-    //@@author Sirisha
+    //@@author siri99
     @Subscribe
     private void handleChangeInternalListEvent(ChangeInternalListEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.fillInnerPartsWithIndicatedList(event.getListName());
     }
-    //@@author Sirisha
+    //@@author siri99
 }
 

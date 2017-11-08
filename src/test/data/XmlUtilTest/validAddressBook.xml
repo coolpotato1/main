@@ -3,6 +3,7 @@
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
+        <birthday isPrivate="false">11/01/1999</birthday>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <score isPrivate="false">2</score>
@@ -10,6 +11,7 @@
     <persons>
         <name>Ruth Mueller</name>
         <phone isPrivate="false">87249245</phone>
+        <birthday isPrivate="false">16/08/1968</birthday>
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
         <score isPrivate="false">3</score>
@@ -17,6 +19,7 @@
     <persons>
         <name>Heinz Kurz</name>
         <phone isPrivate="false">95352563</phone>
+        <birthday isPrivate="false">21/04/1973</birthday>
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
         <score isPrivate="false">1</score>
@@ -24,6 +27,7 @@
     <persons>
         <name>Cornelia Meier</name>
         <phone isPrivate="false">87652533</phone>
+        <birthday isPrivate="false">17/06/2006</birthday>
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
         <score isPrivate="false">4</score>
@@ -31,6 +35,7 @@
     <persons>
         <name>Werner Meyer</name>
         <phone isPrivate="false">9482224</phone>
+        <birthday isPrivate="false">31/05/1936</birthday>
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
         <score isPrivate="false">5</score>
@@ -38,6 +43,7 @@
     <persons>
         <name>Lydia Kunz</name>
         <phone isPrivate="false">9482427</phone>
+        <birthday isPrivate="false">01/08/1998</birthday>
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
         <score isPrivate="false">6</score>
@@ -45,6 +51,7 @@
     <persons>
         <name>Anna Best</name>
         <phone isPrivate="false">9482442</phone>
+        <birthday isPrivate="false">04/06/1998</birthday>
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
         <score isPrivate="false">7</score>
@@ -52,6 +59,7 @@
     <persons>
         <name>Stefan Meier</name>
         <phone isPrivate="false">8482424</phone>
+        <birthday isPrivate="false">14/11/1990</birthday>
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
         <score isPrivate="false">8</score>
@@ -59,6 +67,7 @@
     <persons>
         <name>Martin Mueller</name>
         <phone isPrivate="false">8482131</phone>
+        <birthday isPrivate="false">05/10/1996</birthday>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
         <score isPrivate="false">9</score>

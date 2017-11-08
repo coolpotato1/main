@@ -34,6 +34,9 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      <!-- @author Sirisha -->
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+      <!-- @author Sirisha -->
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <!--@@author Henning-->

@@ -20,6 +20,7 @@ public class Person implements ReadOnlyPerson {
 
     private ObjectProperty<Name> name;
     private ObjectProperty<Phone> phone;
+    private ObjectProperty<Birthday> birthday;
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
     private ObjectProperty<Score> score;
@@ -29,10 +30,14 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Score score, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, score, tags);
+    public Person(Name name, Phone phone, Birthday birthday, Email email, Address address, Score score, Set<Tag> tags) {
+        requireAllNonNull(name, phone, birthday, email, address, score, tags);
+
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
+        //@@author siri99
+        this.birthday = new SimpleObjectProperty<>(birthday);
+        //@@author siri99
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.score = new SimpleObjectProperty<>(score);
@@ -44,8 +49,8 @@ public class Person implements ReadOnlyPerson {
      * Creates a copy of the given ReadOnlyPerson, which is nice.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getScore(),
-                source.getTags());
+        this(source.getName(), source.getPhone(), source.getBirthday(), source.getEmail(),
+                source.getAddress(), source.getScore(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -75,6 +80,22 @@ public class Person implements ReadOnlyPerson {
     public Phone getPhone() {
         return phone.get();
     }
+
+    //@@author siri99
+    public void setBirthday(Birthday birthday)  {
+        this.birthday.set(requireNonNull(birthday));
+    }
+
+    @Override
+    public ObjectProperty<Birthday> birthdayProperty()  {
+        return birthday;
+    }
+
+    @Override
+    public Birthday getBirthday() {
+        return birthday.get();
+    }
+    //@@author siri99
 
     public void setEmail(Email email) {
         this.email.set(requireNonNull(email));
@@ -149,7 +170,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, birthday, email, address, tags);
     }
 
     @Override

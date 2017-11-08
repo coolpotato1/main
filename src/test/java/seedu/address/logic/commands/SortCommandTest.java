@@ -1,4 +1,4 @@
-//@@author Sirisha
+//@@author siri99
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
@@ -19,39 +19,78 @@ import seedu.address.model.UserPrefs;
  */
 public class SortCommandTest {
 
+    final String invalidSortFilter = "random";
+    final String sortFilterName = "name";
+    final String sortFilterBirthday = "birthday";
+    final String sortFilterBirthdayAlias = "b";
+    final String sortFilterDefault = "";
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute() throws Exception {
-        assertCommandSuccess(prepareCommand(), model, SortCommand.MESSAGE_SUCCESS, model);
 
+        // Default filter - sort by name
+        assertCommandSuccess(prepareCommand(sortFilterDefault), model, SortCommand.MESSAGE_SUCCESS_NAME, model);
+
+        // Sort in alphabhetical order of name
+        assertCommandSuccess(prepareCommand(sortFilterName), model, SortCommand.MESSAGE_SUCCESS_NAME, model);
+
+        // Sort in ascending order of birthdays
+        assertCommandSuccess(prepareCommand(sortFilterBirthday), model, SortCommand.MESSAGE_SUCCESS_BIRTHDAY, model);
+
+        // Sort in ascending order of birthdays
+        assertCommandSuccess(prepareCommand(sortFilterBirthdayAlias), model, SortCommand.MESSAGE_SUCCESS_BIRTHDAY,
+                model);
     }
 
     @Test
     public void equals() {
-        final SortCommand standardCommand = new SortCommand();
+
+        final SortCommand sortNameCommand = new SortCommand(sortFilterName);
+        final SortCommand sortBirthdayCommand = new SortCommand(sortFilterBirthday);
+        final SortCommand sortBirthdayAliasCommand = new SortCommand(sortFilterBirthdayAlias);
+        final SortCommand sortDefaultCommand = new SortCommand(sortFilterDefault);
+
+        SortCommand commandExecuted;
+
+        // same filterTypes (Name) -> returns true
+        commandExecuted = new SortCommand(sortFilterName);
+        assertTrue(sortNameCommand.equals(commandExecuted));
+
+        // same filterTypes (Name) -> returns true
+        commandExecuted = new SortCommand(sortFilterBirthday);
+        assertTrue(sortBirthdayCommand.equals(commandExecuted));
+
+        // same filterTypes (Name) -> returns true
+        commandExecuted = new SortCommand(sortFilterBirthdayAlias);
+        assertTrue(sortBirthdayAliasCommand.equals(commandExecuted));
+
+        // same filterTypes (Name) -> returns true
+        commandExecuted = new SortCommand(sortFilterDefault);
+        assertTrue(sortDefaultCommand.equals(commandExecuted));
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertTrue(sortBirthdayCommand.equals(sortBirthdayCommand));
 
-        // null -> returns false
-        assertFalse(standardCommand.equals(null));
-
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        // null object-> returns false
+        assertFalse(sortNameCommand.equals(null));
 
         // different filterTypes -> returns false
-        assertFalse(standardCommand.equals(new SortCommand()));
+        assertFalse(sortNameCommand.equals(new SortCommand(invalidSortFilter)));
+
+        // different command types -> returns false
+        assertFalse(sortDefaultCommand.equals(new UndoCommand()));
+
     }
 
     /**
-     * Returns a {@code SortCommand}
+     * Returns a {@code SortCommand} with parameteres.
      */
-    private SortCommand prepareCommand() {
-        SortCommand sortCommand = new SortCommand();
+    private SortCommand prepareCommand(String sortFilter) {
+        SortCommand sortCommand = new SortCommand(sortFilter);
         sortCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
 }
-//@@author Sirisha
-
+//@@author siri99

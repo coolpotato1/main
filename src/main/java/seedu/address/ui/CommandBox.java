@@ -109,9 +109,9 @@ public class CommandBox extends UiPart<Region> {
         CommandResult commandResult = new CommandResult("");
         String commandText = commandTextField.getText();
         try {
-            if (logic.getCurrentList().contains("favlist") && (commandText.contains("delete")
-                    || commandText.contains("edit"))) {
-                commandResult = new CommandResult("Edit/Delete command does not work in Favourite List");
+            if (logic.getCurrentList().contains("favlist") && ((commandText.contains("delete")
+                    || commandText.contains("edit")) || commandText.contains("sort"))) {
+                commandResult = new CommandResult("Edit/Delete/Sort commands do not work in Favourite List");
                 initHistory();
                 historySnapshot.next();
                 // process result of the command
@@ -204,7 +204,7 @@ public class CommandBox extends UiPart<Region> {
 
     }
     //@@author
-    //@@author Sirisha
+    //@@author siri99
     /**
      * handles button events given to it by the fxml document for which it is set as controller by
      * a constructor in UiPart. handleFavListButton event handles the event when the Favlist button
@@ -223,5 +223,5 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
-    //@@author Sirisha
+    //@@author siri99
 }

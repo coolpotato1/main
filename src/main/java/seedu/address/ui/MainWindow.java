@@ -151,7 +151,7 @@ public class MainWindow extends UiPart<Region> {
 
     }
 
-    //@@author Sirisha
+    //@@author siri99
     /**
      * Changes displayed list accordingly
      */
@@ -167,7 +167,7 @@ public class MainWindow extends UiPart<Region> {
         }
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
-    //@@author Sirisha
+    //@@author siri99
 
     void hide() {
         primaryStage.hide();

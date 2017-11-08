@@ -345,7 +345,7 @@ image::UndoRedoActivityDiagram.png[width="200"]
 **Cons:** Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things. +
 // end::undoredo[]
 
-// fav list
+---
 === Favourite List mechanism
 
 The feature is implemented in a similar way to the ‘Delete’ and ‘List’ features – it uses the index
@@ -354,21 +354,21 @@ command removes that particular Person Object from the list, the favourite comma
 
 The Favourite List feature is split into 3 commands:
 
-1.	`favlist` – This command displays the favourite list. The command favlist raises an event called InternalListEvent which is handled by displaying the favourite list instead of the normal Persons list.
-2.	`Fav` – This command calls the favCommandParser class which parses the input arguments and creates a FavCommand object, this class then adds the number at the index entered by the user into the Favourite List (while making sure there are no duplicate entries).
-3.	`Unfav` – This command calls the favCommandParser class which parses the input arguments and creates a FavCommand object, this class then adds the number at the index entered by the user into the Favourite List (while making sure there are no duplicate entries).
+1.	`favlist` – This command displays the favourite list. The command favlist raises an event called ChangeInternalListEvent which is handled by displaying the favourite list if the String argument passed to the handler is 'favlist' or 'fl'.
+2.	`fav` – This command calls the FavCommandParser class which parses the input arguments and creates a FavCommand object, this class then adds the number at the index entered by the user into the Favourite List (while making sure there are no duplicate entries).
+3.	`unfav` – This command calls the UnfavCommandParser class which parses the input arguments and creates a FavCommand object, this class then adds the number at the index entered by the user into the Favourite List (while making sure there are no duplicate entries).
 
-The Favourite List is a useful feature that allows a user to view all his/her favourite contacts in one place. It saves the time required to search for all the most important/favourite contacts.
+The Favourite List is a useful feature that allows a user to view all his/her favourite contacts in one place. It minimises the time required to search for all the most important/favourite contacts.
 The command to view the favourite list is “favlist” or “fl”.
 
-The "favlist" command inherits from `Undoable Command`. Thus it is supportive of undoing and redoing (using undo and redo command) the current state of Addressbook.
+The `favlist` command inherits from `Undoable Command`. Thus it is supportive of undoing and redoing (using undo and redo command) the current state of Addressbook.
 The following sequence diagram depicts the basic interactions involved between the user and the different application components when the user executes the favourite list command.
 
 image::FavouriteListCommandSequenceDiagram1.png[width="800"]
 _Figure 3.2.1 : Basic Sequence Diagram of the "favlist" command_
 
 image::FavouriteListCommandSequenceDiagram2.png[width="800"]
-_Figure 3.2.2 : Sequence Diagram of the interaction between ModelManager and AddressBook_
+_Figure 3.2.2 : Sequence Diagram of the interaction between ModelManager and AddressBook for favlist command_
 
 This `Logic` interface is used to obtain the copy of the Favourite list when required. As seen by Figure 3.2.1 and Figure 3.2.2 above, to obtain the current favourite list of the address book, "favlist" or “fl” string is first recorded by the `Command Box` and then passed to the Logic interface for execution.
 
@@ -385,7 +385,7 @@ public CommandResult executeUndoableCommand() {
 
 ----
 
-The favlist command calls the calls the getFilteredFavoritePersonList() method residing in the `Logic` interface. LogicManager successively calls the Model interface. `Model` uses ModelManager class to return the filteredFavouritePersons list back to the calling method. Before being passed back, filteredFavouritePersons list calls getFavouritePersonList() method of AddressBook class which then calls the getFavouritePersonList() method in `XmlSerializbleAddressBook`. The XmlSerializbleAddressBook  methdod loads the stored contacts from favourite list and returns it to AddressBook which then returns it to ModelManager. Thus the `filteredFavouritePersons` is now updated with the favourite contacts which are then displayed to the user by calling the changeListTo method which calls the `ChangeInternalListEvent` which is subsequently handled by other methods and the Favourite list is displayed on the personListPanel.
+The favlist command calls the calls the getFilteredFavoritePersonList() method residing in the `Logic` interface. LogicManager successively calls the Model interface. `Model` uses ModelManager class to return the filteredFavouritePersons list back to the calling method. Before being passed back, filteredFavouritePersons list calls getFavouritePersonList() method of AddressBook class which then calls the getFavouritePersonList() method in `XmlSerializbleAddressBook`. The XmlSerializbleAddressBook  method loads the stored contacts from favourite list and returns it to AddressBook which then returns it to ModelManager. Thus the `filteredFavouritePersons` is now updated with the favourite contacts which are then displayed to the user by calling the changeListTo method which calls the `ChangeInternalListEvent` which is subsequently handled by other methods and the Favourite list is displayed on the personListPanel.
 
 This implementation also supports `syncing` of the favourite list with the main list by deleting/editing the person in the favourite list if the person is deleted/edited respectively in the main list. The following code snippet enables this sync mechanism.
 ----
@@ -395,6 +395,40 @@ if (persons.remove(key)) {
             }
             return true;
 ----
+There is also a Star button beside the command line at the top of the addressbook which is the `Favourite` button.
+The button calls a button Event that is handled by handleFavlistButtonAction. The handler calls the favourite list command as
+shown below.
+----
+CommandResult commandResult = logic.execute("favlist");
+logger.info("Result: " + commandResult.feedbackToUser);
+raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+----
+
+The `fav` command creates a FavCommand object that calls addFavouritePerson method of ModelManager. This method calls addFavouritePerson method of AddressBook which then calls the add method from UniquePersonList as shown in the code snippet and diagram below.
+
+----
+requireNonNull(toAdd);
+    if (contains(toAdd)) {
+        throw new DuplicatePersonException();
+    }
+internalList.add(new Person(toAdd));
+----
+
+image::FavCommandSequenceDiagram.png[width="800"]
+_Figure 3.2.3 : Sequence Diagram of the interaction between ModelManager and AddressBook for fav command_
+
+The `unfav` command creates a FavCommand object that calls removeFavouritePerson method of ModelManager. This method calls removeFavouritePerson method of AddressBook which then calls the remove method from UniquePersonList as shown in the code snippet and diagram below.
+
+----
+if (favouritePersons.remove(key)) {
+    return true;
+    } else {
+        throw new PersonNotFoundException();
+    }
+----
+
+image::UnfavCommandSequenceDiagram.png[width="800"]
+_Figure 3.2.4 : Sequence Diagram of the interaction between ModelManager and AddressBook for unfav command_
 
 ==== Design Considerations
 
@@ -411,6 +445,89 @@ user guide  +
  as delete and unfav.
 
 ---
+
+
+=== Sort Command mechanism
+
+
+This Sort command calls the `SortCommandParser` class which parses the input argument and creates a `SortCommand` object, this class then stores the argument in a String called sortFilter.
+
+If sortFilter is `‘name’`, or if there is no filter, it calls the sortFilteredPersonListName method of ModelManager. The method calls sortPersonsByName method of AddressBook which then calls sortPersonsByName of UniquePersonList. It sorts the person list in alphabhetical order of names.
+
+If the sortfilter is is `‘birthday’ or ‘b’`, it calls the sortFilteredPersonListBirthday method of `ModelManager`. The method calls sortPersonsByBirthday
+method of `AddressBook` which then calls s sortPersonsByBirthday of `UniquePersonList`. It sorts the person list in ascending order of birthdays from January to December.
+
+----
+switch(sortFilter) {
+case "name":
+default:
+        model.sortFilteredPersonListName();
+        return new CommandResult(MESSAGE_SUCCESS_NAME);
+
+case "birthday":
+case "b":
+        model.sortFilteredPersonListBirthday();
+        return new CommandResult(MESSAGE_SUCCESS_BIRTHDAY);
+}
+----
+
+image::SortCommandSequenceDiagram.PNG[width="800"]
+_Figure 3.3.1 : Sequence Diagram of the sort command_
+
+The Collections.sort method is used in sortPersonsByName  and sortPersonsByBirthday in UniquePersonList which Sorts the provided observable list using the given comparator.
+
+----
+Comparator<ReadOnlyPerson> personComparator = new Comparator<ReadOnlyPerson>() {
+
+    public int compare(ReadOnlyPerson person1, ReadOnlyPerson person2) {
+
+        String personName1 = person1.getName().toString();
+        String personName2 = person2.getName().toString();
+
+        return personName1.compareTo(personName2);
+    }
+
+};
+
+FXCollections.sort(internalList, personComparator);
+----
+---
+=== Enhanced Find Command mechanism
+
+The `NameContainsKeyWordsPredicate` class which is in the Person
+class is the main class which enables users to find any person
+using their full name, part of the name, or tags of the person.
+The NameContainsKeywordsPredicate class uses functions from the
+StringUtil class to carry out the comparison for find feature.
+
+1. Find by `name`: The containsWordIgnoreCase function in StringUtil
+checks whether the name entered by the user is equal to the name of
+the person in AddressBook (implemented v1.0).
+
+2. Find by `substring` of name: The containsSubstringOfWord function
+first checks if the length of the substring is greater than or
+equal to 2. Then, Using an enhanced for loop, the function iterates
+through the words in a person’s name and checks to see if any of
+them contain with the substring (implemented v1.3).
+
+3. Find by `Tags`: The test method in NameContainsKeyWordsPredicate uses
+two sets, one containing the tag entered by the user and the other
+containing the set of tags of each person and compares accordingly (implemented v1.2).
+
+This feature will make it more convenient for users to find a person
+even if they do not remember the complete name of the person (find by
+substring) or if they do not remember the name at all but remember
+the tags of that person (find by tags) besides the usual find by name
+feature.
+
+==== Design Considerations
+
+**Aspect:** Use of other commands in Favourite list setup (Delete, Edit Command etc). +
+**Alternative 1 (current choice):** Allow users to use find by name, substring of name, and tags in one command by simply typing Find followed by name or tag. Eg. Find Alice Mark friends +
+**Pros:** Users will not make a mistake. Convenient to use. +
+**Alternative 2:** Seperate the different find categories using labels such as '/n' for name and '/t' for tags. Eg. find n/Alice n/Mark t/friends +
+**Pros:** More clear Use of command as users are explicitly specifying whether they are searching for name or tag. +
+**Cons:** Not convenient as users need to type in the labels for each name or tag they want to find.  +
 
 
 === Logging
@@ -1010,46 +1127,6 @@ Cons:
 * ...
 
 [appendix]
-
-== Enhancement Description
-Author: Siri
-
-Added a Sort command feature.
-
-The feature is implemented in a similar way to the list
-feature: the sort command sorts the list in alphabhetical
-order of names and displays the sorted list to the user.
-
-== Enhancement Description
-Author: Siri
-
-Enhancement of Find command.
-
-The `NameContainsKeyWordsPredicate` class which is in the Person
-class is the main class which enables users to find any person
-using their full name, part of the name, or tags of the person.
-The NameContainsKeywordsPredicate class uses functions from the
-StringUtil class to carry out the comparison for find feature.
-
-1. Find by `name`: The containsWordIgnoreCase function in StringUtil
-checks whether the name entered by the user is equal to the name of
-the person in AddressBook.
-
-2. Find by `substring` of name: The containsSubstringOfWord function
-first checks if the length of the substring is greater than or
-equal to 2. Then, Using an enhanced for loop, the function iterates
-through the words in a person’s name and checks to see if any of
-them contain with the substring.
-
-3. Find by `Tags`: The test method in NameContainsKeyWordsPredicate uses
-two sets, one containing the tag entered by the user and the other
-containing the set of tags of each person and compares accordingly.
-
-This feature will make it more convenient for users to find a person
-even if they do not remember the complete name of the person (find by
-substring) or if they do not remember the name at all but remember
-the tags of that person (find by tags) besides the usual find by name
-feature.
 
 == Enhancement Description
 Author: Peng Xu

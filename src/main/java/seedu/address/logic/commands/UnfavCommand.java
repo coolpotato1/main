@@ -1,4 +1,4 @@
-//@@author Sirisha
+//@@author siri99
 package seedu.address.logic.commands;
 
 import java.util.List;
@@ -58,4 +58,4 @@ public class UnfavCommand extends UndoableCommand {
     }
 
 }
-//@@author Sirisha
+//@@author siri99

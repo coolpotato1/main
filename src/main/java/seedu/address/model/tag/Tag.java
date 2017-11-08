@@ -55,8 +55,4 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
-    public String getTagNameOnly() {
-        return tagName;
-    }
-
 }

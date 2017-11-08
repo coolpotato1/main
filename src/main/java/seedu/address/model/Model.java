@@ -26,14 +26,18 @@ public interface Model {
     /** Deletes the given person. */
     void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException;
 
+    //@@author siri99
     /** Deletes the given person from Favourite List. */
     void removeFavouritePerson(ReadOnlyPerson target) throws PersonNotFoundException;
+    //@@author siri99
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
+    //@@author siri99
     /** Adds the given person into Favourite List */
     void addFavouritePerson(ReadOnlyPerson person) throws DuplicatePersonException;
+    //@@author siri99
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -45,18 +49,25 @@ public interface Model {
     void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
+    //@@author siri99
     String getCurrentList();
 
     void setCurrentList(String currentList);
+    //@@author siri99
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
+    //@@author siri99
     /** Returns an unmodifiable view of the filtered favourite person list */
     ObservableList<ReadOnlyPerson> getFilteredFavouritePersonList();
 
     /** Sorts the list in alphabhetical order of names */
-    void sortFilteredPersonList();
+    void sortFilteredPersonListName();
+
+    /** Sorts the list in ascending order of birthdays : Jan to Dec */
+    void sortFilteredPersonListBirthday();
+    //@@author siri99
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -64,7 +75,9 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate);
 
+    //@@author siri99
     void updateFilteredFavouritePersonList(Predicate<ReadOnlyPerson> predicate);
 
     void changeListTo(String listName);
+    //@@author siri99
 }

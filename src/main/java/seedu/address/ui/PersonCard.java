@@ -55,6 +55,10 @@ public class PersonCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
+    //@@author siri99
+    @FXML
+    private Label birthday;
+    //@@author siri99
     @FXML
     private Label address;
     @FXML
@@ -95,6 +99,9 @@ public class PersonCard extends UiPart<Region> {
     private void bindListeners(ReadOnlyPerson person) {
         name.textProperty().bind(Bindings.convert(person.nameProperty()));
         phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
+        //@@author siri99
+        birthday.textProperty().bind(Bindings.convert(person.birthdayProperty()));
+        //@@author siri99
         address.textProperty().bind(Bindings.convert(person.addressProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
         score.textProperty().bind(Bindings.convert(person.scoreProperty()));
@@ -152,13 +159,13 @@ public class PersonCard extends UiPart<Region> {
             String justIndex = id.getText().substring(0, id.getText().length() - 2);
             String delCommand = "delete " + justIndex;
             //@@author
-            //@@author Sirisha
+            //@@author siri99
             if (logic.getCurrentList().contains("favlist")) {
                 commandResult = new CommandResult("Delete command does not work in favourite list");;
             } else {
                 commandResult = logic.execute(delCommand);
             }
-            //@@author Sirisha
+            //@@author siri99
             //@@author Jacob Vosburgh
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
@@ -177,11 +184,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private void handleEditButtonAction(ActionEvent buttonEvent) {
         //@@author
-        //@@author Sirisha
+        //@@author siri99
         CommandResult commandResult = new CommandResult("");
         if (logic.getCurrentList().contains("favlist")) {
             commandResult = new CommandResult("Edit command does not work in favourite list");;
-        } else { //@@author Sirisha
+        } else { //@@author siri99
             //@@author Jacob Vosburgh
             EditWindow editWindow = new EditWindow(logic, cardNum);
             editWindow.show();

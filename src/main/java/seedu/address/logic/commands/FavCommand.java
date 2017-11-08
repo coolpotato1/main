@@ -1,4 +1,4 @@
-//@@author Sirisha
+//@@author siri99
 package seedu.address.logic.commands;
 
 import java.util.List;
@@ -55,4 +55,4 @@ public class FavCommand extends UndoableCommand {
                 && this.targetIndex.equals(((FavCommand) other).targetIndex)); // state check
     }
 }
-//@@author Sirisha
+//@@author siri99

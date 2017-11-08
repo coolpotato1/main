@@ -25,12 +25,12 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
-    //@@author Sirisha
+    //@@author siri99
     /** Returns an unmodifiable view of the filtered list of favourited persons */
     ObservableList<ReadOnlyPerson> getFilteredFavoritePersonList();
 
     String getCurrentList();
-    //@@author Sirisha
+    //@@author siri99
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

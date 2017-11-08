@@ -41,7 +41,7 @@ public class StringUtil {
         return false;
     }
 
-    //@@author Sirisha
+    //@@author siri99
     /**
      * Returns true if the {@code sentence} contains any part of the {@code word}.
      *   Ignores case, and full word match is not required, word just has to be a substring.
@@ -73,7 +73,7 @@ public class StringUtil {
         }
         return false;
     }
-    //@@author Sirisha
+    //@@author siri99
 
     /**
      * Returns a detailed message of the t, including the stack trace.

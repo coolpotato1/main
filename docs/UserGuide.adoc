@@ -75,13 +75,15 @@ Format: `list` or `l`
 
 === Sorting the person list : `sort` or `so`
 
-Sorts the list persons in the address book in alphabhetical order of names. +
-Format: `sort` or `so`
+Sorts the list persons in the address book in either alphabhetical order of names or ascending order of birthdays depending on the parameter. +
+Format: `sort` or `so` or `sort name` or `sort birthday` or `sort b`
 
-=== Printing the addressbook `print` or `p`
-
-COMING V2.0: Exports the entire addressbook to a textfile for easy printing. +
-Format: `print` or `p`
+****
+* Only one parameter can be passed to the command. Either 'name' or 'birthday' or 'b'.
+* If no parameter is passed, eg. 'sort', it will default sort by name.
+* Parameter 'name' will sort by name.
+* Parameter 'birthday' and 'b' will sort by birthday.
+****
 
 === Editing a person : `edit` or `e`
 
@@ -195,10 +197,14 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Listing all Favourite persons : `favlist` or `fl`
+=== Listing Favourite persons : `favlist` or `fl`
 
 Shows a list of all the persons in the Favourite List. +
 Format: `favlist` or `fl`
+
+=== Listing Favourite persons via star button
+
+On being clicked, Star shaped button calls the `favlist` command and shows a list of all the persons in the Favourite List. +
 
 === Adding a person to Favourite List : `fav` or `fv`
 
@@ -217,7 +223,7 @@ Examples:
 * `fav 2` +
 Adds the 2nd person in the address book to the Favourite List.
 
-=== Removing a person from Favourite List : `fav` or `fv`
+=== Removing a person from Favourite List : `unfav` or `unfv`
 
 Removes the person identified by the index number used in the favourite list
 from the favourite list. +
@@ -232,7 +238,7 @@ Format: `unfav INDEX`
 Examples:
 
 * `unfav 3` +
-Adds the 3rd person listed in the Favourite list from the Favourite List.
+Removes the 3rd person listed in the Favourite list from the Favourite List.
 
 === Listing entered commands : `history` or `h`
 
@@ -326,6 +332,16 @@ Format: `exit`
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+=== Printing the addressbook `print` or `p` (coming in v2.0)
+
+Exports the entire addressbook to a textfile for easy printing. +
+Format: `print` or `p`
+
+=== Importing contacts to addressbook `import` or `imp` (coming in v2.0)
+
+Imports contacts from external text file to the addressbook. +
+Format: `import fileAddress` or `imp fileAddress`
 
 == FAQ
 

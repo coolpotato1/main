@@ -112,9 +112,14 @@ public class AddCommandTest {
             return null;
         }
 
-        //@@author Sirisha
+        //@@author siri99
         @Override
-        public void sortFilteredPersonList() {
+        public void sortFilteredPersonListName() {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredPersonListBirthday() {
             fail("This method should not be called.");
         }
 
@@ -154,7 +159,7 @@ public class AddCommandTest {
             fail("This method should not be called.");
             return null;
         }
-        //@@author Sirisha
+        //@@author siri99
 
         @Override
         public void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {

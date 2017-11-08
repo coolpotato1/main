@@ -52,7 +52,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredPersonList();
     }
 
-    //@@author Sirisha
+    //@@author siri99
     @Override
     public ObservableList<ReadOnlyPerson> getFilteredFavoritePersonList() {
         return model.getFilteredFavouritePersonList();
@@ -62,7 +62,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public String getCurrentList() {
         return model.getCurrentList();
     }
-    //@@author Sirisha
+    //@@author siri99
 
     @Override
     public ListElementPointer getHistorySnapshot() {

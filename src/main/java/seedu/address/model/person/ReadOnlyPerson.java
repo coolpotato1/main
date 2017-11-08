@@ -16,6 +16,10 @@ public interface ReadOnlyPerson {
     Name getName();
     ObjectProperty<Phone> phoneProperty();
     Phone getPhone();
+    //@@author siri99
+    ObjectProperty<Birthday> birthdayProperty();
+    Birthday getBirthday();
+    //@@author siri99
     ObjectProperty<Email> emailProperty();
     Email getEmail();
     ObjectProperty<Address> addressProperty();
@@ -33,6 +37,7 @@ public interface ReadOnlyPerson {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPhone().equals(this.getPhone())
+                && other.getBirthday().equals(this.getBirthday())
                 && other.getEmail().equals(this.getEmail())
                 && other.getAddress().equals(this.getAddress()));
     }
@@ -45,6 +50,10 @@ public interface ReadOnlyPerson {
         builder.append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
+                //@@author siri99
+                .append(" Birthday: ")
+                .append(getBirthday())
+                //@@author siri99
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")

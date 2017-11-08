@@ -137,6 +137,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //@@author siri99
     @Test
     public void containsSubstringOfWord_emptyWord_throwsIllegalArgumentException() {
         assertExceptionThrown(IllegalArgumentException.class, "Normal sentence", "  ",
@@ -173,6 +174,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.containsSubstringOfWord("Alicia John carLo", "Johnny"));
 
     }
+    //@@author siri99
 
     //---------------- Tests for getDetails --------------------------------------
 

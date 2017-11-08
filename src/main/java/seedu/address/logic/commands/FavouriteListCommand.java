@@ -1,4 +1,4 @@
-//@@author Sirisha
+//@@author siri99
 package seedu.address.logic.commands;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FAVOURITE_PERSONS;
@@ -21,4 +21,4 @@ public class FavouriteListCommand extends UndoableCommand {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
-//@@author Sirisha
+//@@author siri99
